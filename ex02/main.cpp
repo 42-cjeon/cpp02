@@ -6,7 +6,7 @@
 /*   By: cjeon <cjeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:26:48 by cjeon             #+#    #+#             */
-/*   Updated: 2022/03/14 02:53:18 by cjeon            ###   ########.fr       */
+/*   Updated: 2022/03/14 17:37:55 by cjeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int main(void) {
   std::cout << b << std::endl;
   std::cout << Fixed::max(a, b) << std::endl;
   std::cout << Fixed(1) / Fixed(2) << std::endl;
-
+  std::cout << Fixed(1) / Fixed(3) << std::endl;
+  std::cout << Fixed::min(Fixed(2), Fixed(-3)) << std::endl;
+  std::cout << Fixed(-3) - Fixed(-5) << std::endl;
+  std::cout << Fixed(-1) * Fixed(10) << std::endl;
   return 0;
 }
