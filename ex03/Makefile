@@ -6,7 +6,7 @@
 #    By: cjeon <cjeon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/13 23:05:58 by cjeon             #+#    #+#              #
-#    Updated: 2022/03/14 00:27:57 by cjeon            ###   ########.fr        #
+#    Updated: 2022/03/14 14:38:55 by cjeon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CXXFLAGS = -std=c++98 -pedantic -Wall -Wextra -Werror
 CXXDEBUGFLAGS = -fsanitize=address -fsanitize=undefined
 
 NAME = main
-SRCS = main.cpp Fixed.cpp
+SRCS = main.cpp Fixed.cpp Point.cpp bsp.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all : $(NAME)

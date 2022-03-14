@@ -6,7 +6,7 @@
 /*   By: cjeon <cjeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:16:01 by cjeon             #+#    #+#             */
-/*   Updated: 2022/03/14 02:54:45 by cjeon            ###   ########.fr       */
+/*   Updated: 2022/03/14 14:54:54 by cjeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,11 @@ Fixed Fixed::operator--(int) {
 
   setRawBits(getRawBits() - 1);
   return n;
+}
+
+Fixed &Fixed::operator-(void) {
+  setRawBits(-getRawBits());
+  return *this;
 }
 
 Fixed &Fixed::min(Fixed &a, Fixed &b) { return a > b ? b : a; }
