@@ -6,7 +6,7 @@
 /*   By: cjeon <cjeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:16:01 by cjeon             #+#    #+#             */
-/*   Updated: 2022/03/14 02:52:35 by cjeon            ###   ########.fr       */
+/*   Updated: 2022/03/15 13:52:41 by cjeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ Fixed::Fixed(void) : value_(0) {
   std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int k) : value_(k << (kFractionalBits)) {
+Fixed::Fixed(const int k) : value_(k * (1 << kFractionalBits)) {
   std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const float k) {
-  value_ = static_cast<int>(std::roundf(k * (1 << (kFractionalBits))));
+Fixed::Fixed(const float k) : value_(std::roundf(k * (1 << kFractionalBits))) {
   std::cout << "Float constructor called" << std::endl;
 }
 
@@ -46,10 +45,10 @@ int Fixed::getRawBits(void) const { return value_; }
 void Fixed::setRawBits(const int raw) { value_ = raw; }
 
 float Fixed::toFloat(void) const {
-  return static_cast<double>(value_) / (1 << (kFractionalBits));
+  return static_cast<float>(value_) / (1 << kFractionalBits);
 }
 
-int Fixed::toInt(void) const { return value_ >> (kFractionalBits); }
+int Fixed::toInt(void) const { return value_ / (1 << kFractionalBits); }
 
 std::ostream &operator<<(std::ostream &stream, const Fixed &fixed) {
   stream << fixed.toFloat();

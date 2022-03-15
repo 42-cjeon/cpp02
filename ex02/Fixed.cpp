@@ -6,7 +6,7 @@
 /*   By: cjeon <cjeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:16:01 by cjeon             #+#    #+#             */
-/*   Updated: 2022/03/14 02:53:03 by cjeon            ###   ########.fr       */
+/*   Updated: 2022/03/15 13:47:26 by cjeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@
 
 Fixed::Fixed(void) : value_(0) {}
 
-Fixed::Fixed(const int k) : value_(k << (kFractionalBits)) {}
+Fixed::Fixed(const int k) : value_(k * (1 << kFractionalBits)) {}
 
-Fixed::Fixed(const float k) {
-  value_ = static_cast<int>(std::roundf(k * (1 << (kFractionalBits))));
-}
+Fixed::Fixed(const float k) : value_(std::roundf(k * (1 << kFractionalBits))) {}
 
 Fixed::Fixed(const Fixed &fixed) { *this = fixed; }
 
@@ -33,78 +31,72 @@ Fixed &Fixed::operator=(const Fixed &fixed) {
 }
 
 bool Fixed::operator>(const Fixed &fixed) const {
-  return getRawBits() > fixed.getRawBits();
+  return value_ > fixed.getRawBits();
 }
 
 bool Fixed::operator<(const Fixed &fixed) const {
-  return getRawBits() < fixed.getRawBits();
+  return value_ < fixed.getRawBits();
 }
 
 bool Fixed::operator>=(const Fixed &fixed) const {
-  return getRawBits() >= fixed.getRawBits();
+  return value_ >= fixed.getRawBits();
 }
 
 bool Fixed::operator<=(const Fixed &fixed) const {
-  return getRawBits() <= fixed.getRawBits();
+  return value_ <= fixed.getRawBits();
 }
 
 bool Fixed::operator==(const Fixed &fixed) const {
-  return getRawBits() == fixed.getRawBits();
+  return value_ == fixed.getRawBits();
 }
 
 bool Fixed::operator!=(const Fixed &fixed) const {
-  return getRawBits() != fixed.getRawBits();
+  return value_ != fixed.getRawBits();
 }
 
 Fixed Fixed::operator+(const Fixed &fixed) const {
   Fixed n;
 
-  n.setRawBits(getRawBits() + fixed.getRawBits());
+  n.setRawBits(value_ + fixed.getRawBits());
   return n;
 }
 
 Fixed Fixed::operator-(const Fixed &fixed) const {
   Fixed n;
 
-  n.setRawBits(getRawBits() - fixed.getRawBits());
+  n.setRawBits(value_ - fixed.getRawBits());
   return n;
 }
 
 Fixed Fixed::operator*(const Fixed &fixed) const {
-  Fixed n;
-
-  n.setRawBits((getRawBits() * fixed.getRawBits()) >> kFractionalBits);
-  return n;
+  return Fixed(toFloat() * fixed.toFloat());
 }
 
 Fixed Fixed::operator/(const Fixed &fixed) const {
-  Fixed n;
-
-  n.setRawBits((getRawBits() << kFractionalBits) / fixed.getRawBits());
-  return n;
+  return Fixed(toFloat() / fixed.toFloat());
 }
 
 Fixed &Fixed::operator++(void) {
-  setRawBits(getRawBits() + 1);
+  ++value_;
   return *this;
 }
 
 Fixed Fixed::operator++(int) {
   Fixed n(*this);
 
-  setRawBits(getRawBits() + 1);
+  ++value_;
   return n;
 }
 
 Fixed &Fixed::operator--(void) {
-  setRawBits(getRawBits() - 1);
+  --value_;
   return *this;
 }
 
 Fixed Fixed::operator--(int) {
   Fixed n(*this);
 
-  setRawBits(getRawBits() - 1);
+  --value_;
   return n;
 }
 
@@ -125,10 +117,10 @@ int Fixed::getRawBits(void) const { return value_; }
 void Fixed::setRawBits(const int raw) { value_ = raw; }
 
 float Fixed::toFloat(void) const {
-  return static_cast<float>(value_) / (1 << (kFractionalBits));
+  return static_cast<float>(value_) / (1 << kFractionalBits);
 }
 
-int Fixed::toInt(void) const { return value_ >> (kFractionalBits); }
+int Fixed::toInt(void) const { return value_ / (1 << kFractionalBits); }
 
 std::ostream &operator<<(std::ostream &stream, const Fixed &fixed) {
   stream << fixed.toFloat();

@@ -6,7 +6,7 @@
 /*   By: cjeon <cjeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:09:22 by cjeon             #+#    #+#             */
-/*   Updated: 2022/03/14 14:54:15 by cjeon            ###   ########.fr       */
+/*   Updated: 2022/03/15 13:45:02 by cjeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ class Fixed {
 
   Fixed operator+(const Fixed &fixed) const;
   Fixed operator-(const Fixed &fixed) const;
+  Fixed operator-(void);
   Fixed operator*(const Fixed &fixed) const;
   Fixed operator/(const Fixed &fixed) const;
 
@@ -40,8 +41,6 @@ class Fixed {
   Fixed operator++(int);
   Fixed &operator--(void);
   Fixed operator--(int);
-
-  Fixed &operator-(void);
 
   static Fixed &min(Fixed &a, Fixed &b);
   static const Fixed &min(const Fixed &a, const Fixed &b);
