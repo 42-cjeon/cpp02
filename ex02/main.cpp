@@ -6,7 +6,7 @@
 /*   By: cjeon <cjeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:26:48 by cjeon             #+#    #+#             */
-/*   Updated: 2022/03/15 19:35:45 by cjeon            ###   ########.fr       */
+/*   Updated: 2022/03/15 19:38:01 by cjeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 #include "Fixed.hpp"
 
-void AssertEqual(const Fixed &a, const Fixed &b)
-{
+void AssertEqual(const Fixed &a, const Fixed &b) {
   std::cout << a << std::endl;
   assert((a == b));
 }
@@ -65,7 +64,7 @@ int main(void) {
     std::cout << ++a << std::endl;
     std::cout << b-- << std::endl;
     std::cout << b << std::endl;
-    std::cout << --b << std::endl;
+    std::cout << -- << std::endl;
   }
   std::cout << "[-] Test min / max static function" << std::endl;
   {
